@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodawanie kursu</title>
+</head>
+<body>
+<!--<form th:action="@{'/kurs/stworz'}" th:object="${course}" th:method="'get'">-->
+<!--    <label for="courseName">Nazwa kursu:</label>-->
+<!--    <input type="text" id="courseName" th:field="*{name}">-->
+<!--    <label for="cities">Miasto:</label>-->
+<!--    <select name="cities" id="cities" th:field="*{city}">-->
+<!--        <option th:each="city: ${cities}" th:value="${city}" th:text="${city}"></option>-->
+<!--    </select>-->
+<!--    <input type="submit" value="Add Course">-->
+<!--</form>-->
+<p th:if="${createdCourse}">Dodano kurs w mieście:  <span th:text="${createdCourse.city}"></span> o nazwie: <span th:text="${createdCourse.name}"></span></p>
+<form th:action="@{'/kurs/dodaj'}" th:object="${course}" th:method="'post'">
+    <label for="courseName">Nazwa kursu:</label>
+    <input type="text" id="courseName" th:field="*{name}">
+    <label for="cities">Miasto:</label>
+    <select name="cities" id="cities" th:field="*{city}">
+        <option th:each="city: ${cities}" th:value="${city}" th:text="${city}"></option>
+    </select>
+    <label for="courseMode">Typ kursu:</label>
+    <select name="courseMode" id="courseMode" th:field="*{courseMode}">
+        <option th:each="courseMode: ${courseModes}" th:value="${courseMode}" th:text="${courseMode}"></option>
+    </select>
+    <input type="submit" value="Add Course">
+</form>
+</body>
+</html>

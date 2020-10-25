@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<h1 th:text="${attributeId}"></h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa kursu</th>
+        <th>Data startu</th>
+        <th>Data zakończenia</th>
+        <th>Miasto</th>
+        <th>Cena</th>
+    </tr>
+     <tr>
+        <td>1</td>
+        <td>"SDA Java od podstaw"</td>
+        <td>10.10.2019</td>
+        <td>10.10.2020</td>
+        <td>Warszawa</td>
+        <td>12000</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>"Angular"</td>
+        <td>10.12.2019</td>
+        <td>10.12.2020</td>
+        <td>Warszawa</td>
+        <td>8000</td>
+    </tr>
+</table>
+
+</body>
+</html>

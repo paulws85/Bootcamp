@@ -63,14 +63,14 @@ public class CourseController {
 //    }
 
     @PostMapping("/dodaj-kurs")
-    public String addCourse(@ModelAttribute Course course, Model model) {
+    public String addCourse(@ModelAttribute Course course, @RequestParam String password, Model model) {
         model.addAttribute("cities", CITIES);
         model.addAttribute("courseModes", CourseMode.values());
         model.addAttribute("course", Course.builder().build());
         if (!course.getName().isEmpty() || !course.getCity().isEmpty() || course.getCourseMode() == CourseMode.NULL) {
             model.addAttribute("createdCourse", course);
         }
-        System.out.println(course);
+        System.out.println("Course " + course);
         courseService.saveCourse(course);
         return "course/add-course";
     }

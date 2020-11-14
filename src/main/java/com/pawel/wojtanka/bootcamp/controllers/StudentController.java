@@ -1,5 +1,7 @@
 package com.pawel.wojtanka.bootcamp.controllers;
 
+import static java.util.Objects.isNull;
+
 import com.pawel.wojtanka.bootcamp.model.Course;
 import com.pawel.wojtanka.bootcamp.model.CourseMode;
 import com.pawel.wojtanka.bootcamp.model.Student;
@@ -8,12 +10,14 @@ import com.pawel.wojtanka.bootcamp.service.RuleService;
 import com.pawel.wojtanka.bootcamp.service.StudentService;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,12 +59,27 @@ public class StudentController {
         return "student/register-student";
     }
 
-    @PostMapping("/dodaj-studenta/podsumowanie")
-    public String addStudent(@ModelAttribute Student student, @RequestParam Long[] courseIds) {
-        student.setCourses(courseService.findAllCoursesById(Arrays.asList(courseIds)));
-        student.setRule(ruleService.findRuleByName("student"));
-        System.out.println(student);
-        System.out.println(Arrays.asList(courseIds));
+    @GetMapping("/dodaj-studenta/{courseId}")
+    public String addStudent(@PathVariable Long courseId, Model model) {
+        model.addAttribute("student", Student.builder().build());
+        model.addAttribute("course", courseService.findCourseByCourseId(courseId));
+
+        return "student/register-student";
+    }
+
+    @PostMapping("/dodaj-studenta/{courseId}/podsumowanie")
+    public String addStudent(@PathVariable Long courseId, @ModelAttribute Student student) {
+        String email = student.getEmail();
+        Student existStudent = studentService.findBYEmail(email);
+        if (isNull(existStudent)) {
+            student.setRule(ruleService.findRuleByName("student"));
+        } else {
+            Course course = courseService.findCourseByCourseId(courseId);
+            List<Course> existCourses = existStudent.getCourses();
+            if (!existCourses.contains(course)) {
+                existCourses.add(course);
+            }
+        }
         studentService.saveStudent(student);
 
         return "student/summary";

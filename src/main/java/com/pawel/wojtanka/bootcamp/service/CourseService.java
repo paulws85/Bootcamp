@@ -36,4 +36,9 @@ public class CourseService {
         return courseRepository.findAllById(courseIds);
     }
 
+    public Course findCourseByCourseId(Long courseID) {
+        return courseRepository.findById(courseID)
+            .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono kursu o id: " + courseID));
+    }
+
 }

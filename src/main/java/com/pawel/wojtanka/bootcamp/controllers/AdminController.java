@@ -2,7 +2,6 @@ package com.pawel.wojtanka.bootcamp.controllers;
 
 import com.pawel.wojtanka.bootcamp.model.Rule;
 import com.pawel.wojtanka.bootcamp.model.Student;
-import com.pawel.wojtanka.bootcamp.repository.StudentRepository;
 import com.pawel.wojtanka.bootcamp.service.CourseService;
 import com.pawel.wojtanka.bootcamp.service.RuleService;
 import com.pawel.wojtanka.bootcamp.service.StudentService;
@@ -25,6 +24,11 @@ public class AdminController {
     private final StudentService studentService;
     private final CourseService courseService;
     private final RuleService ruleService;
+
+    @GetMapping(value = "/")
+    public String getAdminPanel() {
+        return "admin/admin-panel";
+    }
 
     @GetMapping(value = "/uzytkownicy/lista")
     public String getStudentList(Model model) {
@@ -59,7 +63,8 @@ public class AdminController {
             Rule rule = (Rule) httpServletRequest.getSession().getAttribute("userRule");
             user.setRule(rule);
             studentService.saveStudent(user);
-        };
+        }
+        ;
         httpServletRequest.getSession().invalidate(); //wywalanie wszystkiego z sesjii
 
         return "redirect:/admin/uzytkownicy/lista";

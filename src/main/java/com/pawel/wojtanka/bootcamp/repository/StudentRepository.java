@@ -11,4 +11,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findByRule_RuleNameContains(String ruleName);
 
+    Student findByEmail(String email);
+
 }

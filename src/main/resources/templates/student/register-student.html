@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Zapisz sie na kurs:</h1>
-<form th:action="@{'/studenci/dodaj-studenta/podsumowanie'}" th:object="${student}" th:method="'post'">
+<form th:action="@{/studenci/dodaj-studenta/{courseId}/podsumowanie(courseId=${course.id})}" th:object="${student}" th:method="'post'">
     <label for="name">Imię:</label>
     <input type="text" id="name" th:field="*{firstName}">
     <label for="surname">Nazwisko:</label>
@@ -16,15 +16,16 @@
     <input type="text" id="email" th:field="*{email}">
     <label for="phoneNumber">Telefon:</label>
     <input type="text" id="phoneNumber" th:field="*{phoneNumber}">
-    <p>Wybierz kurs:</p>
-    <div th:each="course: ${courseList}">
-        <input type="checkbox" th:name="courseIds" th:value="${course.id}">
-        <span th:text="${course.name} + ' - ' + ${course.courseMode}"></span>
-    </div>
-    <label for="ruleId">Wybierz rolę:</label>
-    <select th:name="ruleName" id="ruleId">
-        <option th:each="rule: ${ruleList}" th:value="${rule.ruleName}" th:text="${rule.ruleName}"></option>
-    </select>
+    <strong>Zapisz sie na kurs <span th:text="${course.getName()}"></span></strong>
+<!--    <p>Wybierz kurs:</p>-->
+<!--    <div th:each="course: ${courseList}">-->
+<!--        <input type="checkbox" th:name="courseIds" th:value="${course.id}">-->
+<!--        <span th:text="${course.name} + ' - ' + ${course.courseMode}"></span>-->
+<!--    </div>-->
+<!--    <label for="ruleId">Wybierz rolę:</label>-->
+<!--    <select th:name="ruleName" id="ruleId">-->
+<!--        <option th:each="rule: ${ruleList}" th:value="${rule.ruleName}" th:text="${rule.ruleName}"></option>-->
+<!--    </select>-->
 <!--    <label for="courseId">Wybierz kurs:</label>-->
 <!--    <select name="courseId" id="courseId" th:field="*{courses}">-->
 <!--        <option th:each="course: ${courseList}" th:value="${course.name}" th:text="${course.name}"></option>-->

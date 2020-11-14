@@ -18,6 +18,7 @@
         <th>Cena</th>
         <th>Tryb</th>
         <th>Trener prowadzący</th>
+        <th>Opcje</th>
     </tr>
     <!--     <tr>-->
     <!--        <td>1</td>-->
@@ -45,6 +46,7 @@
         <td th:text="${course.courseMode.getDescription()}"></td>
         <td th:if="${course.teacher} != null" th:text="${course.teacher.firstName} + ' ' + ${course.teacher.lastName}"></td>
         <td th:unless="${course.teacher} != null"></td>
+        <td><a th:href="@{/studenci/dodaj-studenta/{courseId}(courseId=${course.id})}">Zapisz się</a></td>
     </tr>
 </table>
 

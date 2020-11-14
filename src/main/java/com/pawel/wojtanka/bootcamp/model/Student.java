@@ -1,6 +1,7 @@
 package com.pawel.wojtanka.bootcamp.model;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +36,14 @@ public class Student {
     private String lastName;
 
     @NotEmpty
+    @Column(unique = true)
     private String email;
 
     private String phoneNumber;
 
     private Integer ratePerHour;
+
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "rule_id")

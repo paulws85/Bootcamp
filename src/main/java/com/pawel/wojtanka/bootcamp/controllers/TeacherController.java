@@ -23,12 +23,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/trenerzy")
+@RequestMapping(value = "/panel-trenera")
 public class TeacherController {
 
     private final CourseService courseService;
     private final StudentService studentService;
     private final RuleService ruleService;
+
+    @GetMapping("/")
+    public String getTeacherDashboard() {
+        return "teacher/teacher-panel";
+    }
 
     @GetMapping("/dodaj-trenera")
     public String addTeacher(Model model) {
@@ -40,6 +45,8 @@ public class TeacherController {
 
     @PostMapping("/dodaj-trenera/podsumowanie")
     public String addTeacher(@Valid @ModelAttribute("teacher") Student student, BindingResult bindingResult, @RequestParam Long[] courseIds, Model model) {
+//        bindingResult.rejectValue("field_nsme", "errorCode", "defaultMessage");
+
         if (bindingResult.hasErrors()) {
 //            bindingResult.getAllErrors().forEach(objectError -> {
 //                System.out.println(objectError.getDefaultMessage());
@@ -57,8 +64,8 @@ public class TeacherController {
         student.setCourses(courses);
         Rule rule = ruleService.findRuleByName("teacher");
         student.setRule(rule);
-        System.out.println(student);
-        System.out.println(Arrays.asList(courseIds));
+        System.out.println("Student " + student);
+        System.out.println("CoursesIds " + Arrays.asList(courseIds));
         studentService.saveStudent(student);
 
         return "teacher/summary";

@@ -43,8 +43,8 @@ public class StudentService {
         studentRepository.deleteById(userId);
     }
 
-    public void editUser(Student user) {
-
+    public Student findBYEmail(String email) {
+        return studentRepository.findByEmail(email);
     }
 
     public Student findUser(Long userId) {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student registration</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<h1>Zapisz sie na kurs:</h1>
+<form th:action="@{'/trenerzy/dodaj-trenera/podsumowanie'}" th:object="${teacher}" th:method="'posót'">
+    <!--    <p th:if="${#fields.hasErrors('firstName')}"-->
+    <!--       th:errors="*{firstName}"></p>-->
+    <div>
+        <li th:each="errorMessage: ${errorList}" th:text="${errorMessage}" th:classappend="error-text"></li>
+    </div>
+    <label for="name">Imię:</label>
+    <input type="text" id="name" th:field="*{firstName}" th:classappend="${#fields.hasErrors('firstName')} ? 'error-text'">
+    <label for="surname">Nazwisko:</label>
+    <input type="text" id="surname" th:field="*{lastName}" th:errorclass="error-text">
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" th:field="*{email}">
+    <label for="phoneNumber">Telefon:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}">
+    <label for="ratePerHour">Stawka godzinowa:</label>
+    <input type="text" id="ratePerHour" th:field="*{ratePerHour}">
+    <p>Wybierz kurs:</p>
+    <div th:each="course: ${courseList}">
+        <input type="checkbox" th:name="courseIds" th:value="${course.id}">
+        <span th:text="${course.name} + ' - ' + ${course.courseMode}"></span>
+    </div>
+    <input type="submit" value="Add Teacher">
+</form>
+</body>
+</html>

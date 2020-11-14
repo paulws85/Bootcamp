@@ -6,7 +6,7 @@
     <title>Dodawanie kursu</title>
 </head>
 <body>
-<!--<form th:action="@{'/kurs/stworz'}" th:object="${course}" th:method="'get'">-->
+<!--<form th:action="@{'/kursy/stworz'}" th:object="${course}" th:method="'get'">-->
 <!--    <label for="courseName">Nazwa kursu:</label>-->
 <!--    <input type="text" id="courseName" th:field="*{name}">-->
 <!--    <label for="cities">Miasto:</label>-->
@@ -16,7 +16,7 @@
 <!--    <input type="submit" value="Add Course">-->
 <!--</form>-->
 <p th:if="${createdCourse}">Dodano kurs w mieście:  <span th:text="${createdCourse.city}"></span> o nazwie: <span th:text="${createdCourse.name}"></span></p>
-<form th:action="@{'/kurs/dodaj'}" th:object="${course}" th:method="'post'">
+<form th:action="@{'/kursy/dodaj-kurs'}" th:object="${course}" th:method="'post'">
     <label for="courseName">Nazwa kursu:</label>
     <input type="text" id="courseName" th:field="*{name}">
     <label for="cities">Miasto:</label>
@@ -25,8 +25,18 @@
     </select>
     <label for="courseMode">Typ kursu:</label>
     <select name="courseMode" id="courseMode" th:field="*{courseMode}">
-        <option th:each="courseMode: ${courseModes}" th:value="${courseMode}" th:text="${courseMode}"></option>
+        <option th:each="courseMode: ${courseModeList}" th:value="${courseMode}" th:text="${courseMode.getDescription()}"></option>
     </select>
+    <label for="teacher">Trener prowadzący:</label>
+    <select name="courseMode" id="teacher" th:field="*{teacher}">
+        <option th:each="teacher: ${teacherList}" th:value="${teacher.id}" th:text="${teacher.firstName}  + ' ' +  ${teacher.lastName}"></option>
+    </select>
+    <label for="startDate">Data rozpoczęcia:</label>
+    <input type="date" id="startDate" th:field="*{startDate}">
+    <label for="endDate">Data zakończenia:</label>
+    <input type="date" id="endDate" th:field="*{endDate}">
+    <label for="price">Cena:</label>
+    <input type="text" id="price" th:field="*{price}">
     <input type="submit" value="Add Course">
 </form>
 </body>

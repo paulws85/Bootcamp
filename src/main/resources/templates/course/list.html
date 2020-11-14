@@ -16,22 +16,35 @@
         <th>Data zakończenia</th>
         <th>Miasto</th>
         <th>Cena</th>
+        <th>Tryb</th>
+        <th>Trener prowadzący</th>
     </tr>
-     <tr>
-        <td>1</td>
-        <td>"SDA Java od podstaw"</td>
-        <td>10.10.2019</td>
-        <td>10.10.2020</td>
-        <td>Warszawa</td>
-        <td>12000</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>"Angular"</td>
-        <td>10.12.2019</td>
-        <td>10.12.2020</td>
-        <td>Warszawa</td>
-        <td>8000</td>
+    <!--     <tr>-->
+    <!--        <td>1</td>-->
+    <!--        <td>"SDA Java od podstaw"</td>-->
+    <!--        <td>10.10.2019</td>-->
+    <!--        <td>10.10.2020</td>-->
+    <!--        <td>Warszawa</td>-->
+    <!--        <td>12000</td>-->
+    <!--    </tr>-->
+    <!--    <tr>-->
+    <!--        <td>2</td>-->
+    <!--        <td>"Angular"</td>-->
+    <!--        <td>10.12.2019</td>-->
+    <!--        <td>10.12.2020</td>-->
+    <!--        <td>Warszawa</td>-->
+    <!--        <td>8000</td>-->
+    <!--    </tr>-->
+    <tr th:each="course: ${courseList}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.startDate}"></td>
+        <td th:text="${course.endDate}"></td>
+        <td th:text="${course.city}"></td>
+        <td th:text="${course.price}"></td>
+        <td th:text="${course.courseMode.getDescription()}"></td>
+        <td th:if="${course.teacher} != null" th:text="${course.teacher.firstName} + ' ' + ${course.teacher.lastName}"></td>
+        <td th:unless="${course.teacher} != null"></td>
     </tr>
 </table>
 

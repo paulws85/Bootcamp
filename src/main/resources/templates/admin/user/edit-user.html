@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja użytkownika</title>
+</head>
+<body>
+<h1>Edycja użytkownika:</h1>
+<form th:action="@{/admin/uzytkownicy/edytuj/{id}(id=${user.id})}" th:object="${user}" th:method="'post'">
+    <label for="name">Imię:</label>
+    <input type="text" id="name" th:field="*{firstName}">
+    <label for="surname">Nazwisko:</label>
+    <input type="text" id="surname" th:field="*{lastName}">
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" th:field="*{email}">
+    <label for="phoneNumber">Telefon:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}">
+    <label for="ratePerHour">Stawka godzinowa:</label>
+    <input type="text" id="ratePerHour" th:field="*{ratePerHour}">
+<!--    <label for="ruleId">Wybierz rolę:</label>-->
+<!--    <select th:name="ruleName" id="ruleId">-->
+<!--        <option th:each="rule: ${ruleList}" th:value="${rule.ruleName}" th:text="${rule.ruleName}"></option>-->
+<!--    </select>-->
+    <p>Wybierz kurs:</p>
+    <div th:each="course: ${courseList}">
+        <input type="checkbox" th:field="*{courses}" th:name="courseIds" th:value="${course.id}">
+        <span th:text="${course.name} + ' - ' + ${course.courseMode}"></span>
+    </div>
+    <input type="submit" value="Edit">
+</form>
+</body>
+</html>

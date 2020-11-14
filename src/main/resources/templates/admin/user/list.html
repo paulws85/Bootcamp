@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista użytkowników</title>
+</head>
+<body>
+<h1>Lista użytkowników:</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Rola</th>
+        <th>Stawka godzinowa</th>
+        <th>Operacje</th>
+    </tr>
+    <tr th:each="user: ${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:if="${user.rule} != null" th:text="${user.rule.getRuleName()}"></td>
+        <td th:unless="${user.rule} != null"></td>
+        <td th:text="${user.ratePerHour}"></td>
+        <td>
+            <a th:href="@{/admin/uzytkownicy/edytuj/{id}(id=${user.id})}">Edytuj</a>
+            <a th:href="@{/admin/uzytkownicy/usun/{id}(id=${user.id})}">Usuń</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -45,15 +45,15 @@ public class TeacherController {
 
     @PostMapping("/dodaj-trenera/podsumowanie")
     public String addTeacher(@Valid @ModelAttribute("teacher") Student student, BindingResult bindingResult, @RequestParam Long[] courseIds, Model model) {
-//        bindingResult.rejectValue("field_nsme", "errorCode", "defaultMessage");
+//        bindingResult.rejectValue("password", "teacher.password", "Hasła są różne");
 
         if (bindingResult.hasErrors()) {
 //            bindingResult.getAllErrors().forEach(objectError -> {
 //                System.out.println(objectError.getDefaultMessage());
 //            });
             model.addAttribute("errorList", bindingResult.getAllErrors().stream()
-            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-            .collect(Collectors.toList()));
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.toList()));
             model.addAttribute("teacher", student);
             model.addAttribute("courseList", courseService.findAllCourses());
 

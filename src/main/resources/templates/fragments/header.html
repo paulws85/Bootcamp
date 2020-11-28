@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:fragment="title">Jesteś na stronie bootcamp!</h1>
+    <nav th:fragment="menu">
+        <ul>
+            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER','ROLE_USER')"><a>Lista kursów</a></li>
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a>Dodaj kurs</a></li>
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a>Lista użytkowników</a></li>
+            <li sec:authorize="hasAnyAuthority('ROLE_TEACHER','ROLE_USER')"><a>Moje kursy</a></li>
+            <li sec:authorize="hasAnyAuthority('ROLE_TEACHER','ROLE_USER')"><a>Edytuj profil</a></li>
+            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER','ROLE_USER')"><a>Wyloguj</a></li>
+            <li><a>Zaloguj</a></li>
+        </ul>
+
+    </nav>
+</body>
+</html>

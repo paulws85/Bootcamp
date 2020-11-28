@@ -25,7 +25,9 @@
     <label for="ratePerHour">Stawka godzinowa:</label>
     <input type="text" id="ratePerHour" th:field="*{ratePerHour}">
     <label for="password">Podaj hasło:</label>
-    <input type="text" id="password" th:field="*{password}">
+    <input type="password" id="password" th:field="*{password}">
+    <label for="confirmPassword">Podaj hasło:</label>
+    <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
     <p>Wybierz kurs:</p>
     <div th:each="course: ${courseList}">
         <input type="checkbox" th:name="courseIds" th:value="${course.id}">

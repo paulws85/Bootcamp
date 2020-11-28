@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lista kursów</title>
     <link rel="stylesheet" th:href="@{/css/list.css}">
 </head>
 <body>
+Jesteś zalogowany jako: <span sec:authentication="name"></span> <br><br>
+<div sec:authorize="isAuthenticated()">
+    Wykorzystujesz role:<br>
+    <span sec:authentication="principal.authorities"></span>
+</div>
+
+<header th:replace="fragments/header :: title"></header>
+<header th:replace="fragments/header :: menu"></header>
+
+<span sec:authorize="hasAuthority('ROLE_TEACHER')">Jesteś trenerem</span> <br><br>
 <h1 th:text="${attributeId}"></h1>
 <table>
     <tr>

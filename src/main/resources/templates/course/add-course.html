@@ -37,6 +37,8 @@
     <input type="date" id="endDate" th:field="*{endDate}">
     <label for="price">Cena:</label>
     <input type="text" id="price" th:field="*{price}">
+    <label for="userPassword">Hasło nowego użytkownika:</label>
+    <input type="text" id="userPassword" th:field="${course.teacher.password}">
     <input type="submit" value="Add Course">
 </form>
 </body>

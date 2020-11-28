@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,13 +44,17 @@ public class Student {
 
     private Integer ratePerHour;
 
+    @NotEmpty
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     @ManyToOne
     @JoinColumn(name = "rule_id")
     private Rule rule;
 
-    @ManyToMany
+    @ManyToMany()
     private List<Course> courses;
 
     @Override

@@ -19,7 +19,7 @@ public class CourseService {
     }
 
     public List<Course> findAllCourses() {
-        List<Course> courses =  courseRepository.findAll();
+        List<Course> courses =  courseRepository.deepFindCourse();
 
         courses.forEach(course -> {
             List<Student> teachers = course.getStudents().stream()
